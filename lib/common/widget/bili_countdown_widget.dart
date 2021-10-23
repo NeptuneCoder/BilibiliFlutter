@@ -13,10 +13,28 @@ class CountdownWidget extends BiliWidget {
   final VoidCallback? onClick;
 
   final VoidCallback? onFinish;
+  final int total;
+  final double borderRadius;
+  final String content;
+  final double? height;
 
-  int total = 5;
+  final Color? textColor;
+  final Color? focusColor;
+  final Color? hoverColor;
+  final Color? highlightColor;
 
-  CountdownWidget(int total, {Key? key, this.onClick, this.onFinish})
+  CountdownWidget(
+      {this.total = 5,
+      Key? key,
+      this.height = 40,
+      this.onClick,
+      this.onFinish,
+      this.borderRadius = 20,
+      this.content = "倒计时",
+      this.textColor = Colors.black,
+      this.focusColor,
+      this.hoverColor,
+      this.highlightColor})
       : super(key: key);
 
   @override
@@ -48,20 +66,27 @@ class _CountdownWidgetState extends BiliState<CountdownWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      focusColor: widget.focusColor,
+      hoverColor: widget.hoverColor,
+      highlightColor: widget.highlightColor,
       onTap: () {
         widget.onClick?.call();
       },
       child: SizedBox(
-        height: 40,
+        height: widget.height,
         child: Card(
           elevation: 1,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.all(Radius.circular(widget.borderRadius)),
           ),
           child: Center(
             child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10),
-              child: Text("倒计时${widget.total - _count}s"),
+              child: Text(
+                "${widget.content}${widget.total - _count}s",
+                style: TextStyle(color: widget.textColor),
+              ),
             ),
           ),
         ),

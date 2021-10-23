@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bilibili_flutter/common/base/base_state.dart';
 import 'package:bilibili_flutter/common/base/base_widget.dart';
 import 'package:bilibili_flutter/common/log/bl_log.dart';
-import 'package:bilibili_flutter/common/widget/bili_time_widget.dart';
+import 'package:bilibili_flutter/common/widget/bili_countdown_widget.dart';
 import 'package:bilibili_flutter/moudles/app/global_routes.dart';
 import 'package:bilibili_flutter/moudles/empty/empty.dart';
 import 'package:flutter/material.dart';
@@ -22,23 +22,21 @@ class BiliApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-              return GlobalRoutes.getWidgetByName(settings.name!,
+          return GlobalRoutes.getWidgetByName(settings.name!,
                   param: ((settings.arguments ?? "") as String)) ??
-                  EmptyPage();
-            },
-            transitionsBuilder: (context, animation, secondaryAnimation,
-                child) {
-              const begin = Offset(1.0, 0.0);
-              const end = Offset.zero;
-              const curve = Curves.ease;
-              final tween =
+              EmptyPage();
+        }, transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+          final tween =
               Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-              final offsetAnimation = animation.drive(tween);
-              return SlideTransition(
-                position: offsetAnimation,
-                child: child,
-              );
-            });
+          final offsetAnimation = animation.drive(tween);
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        });
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -79,9 +77,19 @@ class _SplashPageState extends BiliState<SplashPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-
             CountdownWidget(
-              5,
+              onClick: () {
+                _skip2main();
+              },
+              onFinish: () {
+                _skip2main();
+              },
+            ),
+            CountdownWidget(
+              total: 10,
+              content: "已发送",
+              textColor: Colors.blue,
+              borderRadius: 2,
               onClick: () {
                 _skip2main();
               },
