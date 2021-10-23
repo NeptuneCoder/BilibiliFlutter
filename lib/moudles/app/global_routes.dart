@@ -8,7 +8,7 @@ class GlobalRoutes {
   GlobalRoutes._private();
 
   static const String mainPage = "/main_page";
-  static const Map<String, Widget> _globalRoutes = <String, Widget>{
+  static final Map<String, Widget> _globalRoutes = <String, Widget>{
     mainPage: MainPage(),
   };
 

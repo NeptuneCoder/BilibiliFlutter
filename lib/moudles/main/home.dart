@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class HomePage extends BiliWidget {
-  const HomePage({Key? key}) : super(key: key);
+   HomePage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _HomeState();
@@ -14,6 +14,8 @@ class HomePage extends BiliWidget {
 class _HomeState extends BiliState {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Text("首页"),
+    );
   }
 }

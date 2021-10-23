@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class PublishPage extends BiliWidget {
-  const PublishPage({Key? key}) : super(key: key);
+  PublishPage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _PublishState();
@@ -14,6 +14,8 @@ class PublishPage extends BiliWidget {
 class _PublishState extends BiliState {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Text("发布"),
+    );
   }
 }

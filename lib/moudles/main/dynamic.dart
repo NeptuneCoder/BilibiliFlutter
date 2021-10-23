@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class DynamicPage extends BiliWidget {
-  const DynamicPage({Key? key}) : super(key: key);
+   DynamicPage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _DynamicState();
@@ -14,7 +14,9 @@ class DynamicPage extends BiliWidget {
 class _DynamicState extends BiliState {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Text("动态"),
+    );
   }
 }
 

@@ -7,9 +7,11 @@ import 'package:bilibili_flutter/moudles/main/member.dart';
 import 'package:bilibili_flutter/moudles/main/publish.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+
 /// 接受首页五个tab界面
+@immutable
 class MainPage extends BiliWidget {
-  const MainPage({Key? key}) : super(key: key);
+  MainPage({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _MainState();
@@ -51,19 +53,19 @@ class _MainState extends BiliState {
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home, color: _getCurItemColor(2)),
+                icon: Icon(Icons.home, color: _getCurItemColor(0)),
                 label: "首页"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.dynamic_feed, color: _getCurItemColor(2)),
+                icon: Icon(Icons.dynamic_feed, color: _getCurItemColor(1)),
                 label: "动态"),
             BottomNavigationBarItem(
                 icon: Icon(Icons.publish, color: _getCurItemColor(2)),
                 label: "发布"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.card_membership, color: _getCurItemColor(2)),
+                icon: Icon(Icons.card_membership, color: _getCurItemColor(3)),
                 label: "会员购"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.home, color: _getCurItemColor(2)), label: "我的")
+                icon: Icon(Icons.home, color: _getCurItemColor(4)), label: "我的")
           ],
           currentIndex: _currentIndex,
           onTap: (index) {
