@@ -29,7 +29,7 @@ class _MainState extends BiliState {
 
   Color _getCurItemColor(int index) {
     if (index == _currentIndex) {
-      return Theme.of(context).primaryColor;
+      return Colors.blue;
     } else {
       return Colors.grey.shade400;
     }

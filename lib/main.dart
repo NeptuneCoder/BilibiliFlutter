@@ -65,7 +65,6 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-
     var duration = const Duration(seconds: 4);
     _timer = Timer(duration, () {
       Navigator.pushReplacementNamed(context, GlobalRoutes.mainPage);
