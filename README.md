@@ -2,6 +2,9 @@
 用flutter模仿B站客户端，验证相关技术的运用。
 
 1. 添加dio网络框架
+```sh
+ flutter pub add dio
+```
 ## Getting Started
 
 This project is a starting point for a Flutter application.
