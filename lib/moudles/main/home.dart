@@ -9,10 +9,10 @@ class HomePage extends BiliWidget {
    HomePage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _HomeState();
+  State<HomePage> createState() => _HomeState();
 }
 
-class _HomeState extends BiliState {
+class _HomeState extends BiliState<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

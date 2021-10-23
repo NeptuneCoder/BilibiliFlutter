@@ -1,5 +1,9 @@
 import 'dart:async';
 
+import 'package:bilibili_flutter/common/base/base_state.dart';
+import 'package:bilibili_flutter/common/base/base_widget.dart';
+import 'package:bilibili_flutter/common/log/bl_log.dart';
+import 'package:bilibili_flutter/common/widget/bili_time_widget.dart';
 import 'package:bilibili_flutter/moudles/app/global_routes.dart';
 import 'package:bilibili_flutter/moudles/empty/empty.dart';
 import 'package:flutter/material.dart';
@@ -37,13 +41,13 @@ class BiliApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashPage(title: 'Flutter Demo Home Page'),
+      home: SplashPage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key, required this.title}) : super(key: key);
+class SplashPage extends BiliWidget {
+  SplashPage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -51,7 +55,7 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class _SplashPageState extends BiliState<SplashPage> {
   late Timer _timer;
 
   @override
@@ -65,11 +69,14 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    var duration = const Duration(seconds: 4);
-    _timer = Timer(duration, () {
+    var duration = const Duration(seconds: 10);
+    _timer = Timer.periodic(duration, (timer) {
+      Log.i("timer === ${timer.tick}");
       Navigator.pushReplacementNamed(context, GlobalRoutes.mainPage);
     });
   }
+
+  String _countTime = "3";
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +96,9 @@ class _SplashPageState extends State<SplashPage> {
       ),
       body: Container(
         color: Colors.white,
+        child: Row(
+          children: [CountdownWidget(_countTime)],
+        ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );

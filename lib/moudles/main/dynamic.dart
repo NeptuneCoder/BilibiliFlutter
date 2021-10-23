@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class DynamicPage extends BiliWidget {
-   DynamicPage({Key? key}) : super(key: key);
+  DynamicPage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _DynamicState();
+  State<DynamicPage> createState() => _DynamicState();
 }
 
-class _DynamicState extends BiliState {
+class _DynamicState extends BiliState<DynamicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

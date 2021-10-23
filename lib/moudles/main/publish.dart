@@ -9,10 +9,10 @@ class PublishPage extends BiliWidget {
   PublishPage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _PublishState();
+  State<PublishPage> createState() => _PublishState();
 }
 
-class _PublishState extends BiliState {
+class _PublishState extends BiliState<PublishPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

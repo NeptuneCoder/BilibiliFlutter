@@ -1,7 +1,10 @@
 # bilibili_flutter
 
-用flutter模仿B站客户端，验证相关技术的运用。
+用flutter模仿B站客户端，验证相关技术的运用。项目使用原生技术实现。
+#### 反编译b站app获取图片资源。
+https://blog.mcxiaoke.com/2010/11/22/android-apk-files-decompile-how-to/
 
+#### 第三方框架
 1. 添加dio网络框架
 
 ```shell
@@ -13,6 +16,8 @@
 ```shell
 flutter pub add flutter_screenutil
 ```
+
+
 
 ## Getting Started
 

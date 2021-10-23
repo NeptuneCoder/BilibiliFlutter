@@ -5,7 +5,7 @@ class Log {
 
   static void i(String content) {
     if (GlobalConstant.isDebug) {
-      print("lm=$content");
+      print("Bili=$content");
     }
   }
 }
