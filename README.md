@@ -17,6 +17,12 @@ https://blog.mcxiaoke.com/2010/11/22/android-apk-files-decompile-how-to/
 flutter pub add flutter_screenutil
 ```
 
+#### 开发中遇到的不清楚的问题
+1. 为什么在state中的泛型指定了widget后，在state中可以获取到在widget中定义的变量？
+2. 在抽象类中如何初始化子类
+3. factory 详细的使用流程和原理
+4. 构造函数中怎么给位置参数传默认值
+
 
 
 ## Getting Started

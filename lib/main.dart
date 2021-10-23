@@ -22,21 +22,23 @@ class BiliApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         return PageRouteBuilder(
             pageBuilder: (context, animation, secondaryAnimation) {
-          return GlobalRoutes.getWidgetByName(settings.name!,
+              return GlobalRoutes.getWidgetByName(settings.name!,
                   param: ((settings.arguments ?? "") as String)) ??
-              EmptyPage();
-        }, transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0.0);
-          const end = Offset.zero;
-          const curve = Curves.ease;
-          final tween =
+                  EmptyPage();
+            },
+            transitionsBuilder: (context, animation, secondaryAnimation,
+                child) {
+              const begin = Offset(1.0, 0.0);
+              const end = Offset.zero;
+              const curve = Curves.ease;
+              final tween =
               Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          final offsetAnimation = animation.drive(tween);
-          return SlideTransition(
-            position: offsetAnimation,
-            child: child,
-          );
-        });
+              final offsetAnimation = animation.drive(tween);
+              return SlideTransition(
+                position: offsetAnimation,
+                child: child,
+              );
+            });
       },
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -56,28 +58,6 @@ class SplashPage extends BiliWidget {
 }
 
 class _SplashPageState extends BiliState<SplashPage> {
-  late Timer _timer;
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _timer.cancel();
-  }
-
-  ///注册倒计时
-  @override
-  void initState() {
-    super.initState();
-    var duration = const Duration(seconds: 10);
-    _timer = Timer.periodic(duration, (timer) {
-      Log.i("timer === ${timer.tick}");
-      Navigator.pushReplacementNamed(context, GlobalRoutes.mainPage);
-    });
-  }
-
-  String _countTime = "3";
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -97,10 +77,27 @@ class _SplashPageState extends BiliState<SplashPage> {
       body: Container(
         color: Colors.white,
         child: Row(
-          children: [CountdownWidget(_countTime)],
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+
+            CountdownWidget(
+              5,
+              onClick: () {
+                _skip2main();
+              },
+              onFinish: () {
+                _skip2main();
+              },
+            )
+          ],
         ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  ///点击直接进入到首页
+  void _skip2main() {
+    Navigator.pushReplacementNamed(context, GlobalRoutes.mainPage);
   }
 }
