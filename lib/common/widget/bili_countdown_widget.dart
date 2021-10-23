@@ -44,7 +44,7 @@ class CountdownWidget extends BiliWidget {
 class _CountdownWidgetState extends BiliState<CountdownWidget> {
   var _count = 0;
 
-  late Timer _timer;
+  late Timer? _timer;
 
   ///注册倒计时
   @override
@@ -57,8 +57,9 @@ class _CountdownWidgetState extends BiliState<CountdownWidget> {
           _count++;
         });
       } else {
+        _timer?.cancel();
+        _timer = null;
         widget.onFinish?.call();
-        _timer.cancel();
       }
     });
   }
@@ -70,7 +71,9 @@ class _CountdownWidgetState extends BiliState<CountdownWidget> {
       hoverColor: widget.hoverColor,
       highlightColor: widget.highlightColor,
       onTap: () {
+        _timer?.cancel();
         widget.onClick?.call();
+        _timer = null;
       },
       child: SizedBox(
         height: widget.height,
