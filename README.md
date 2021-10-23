@@ -1,5 +1,5 @@
 # bilibili_flutter
-私用flutter模仿B站客户端重新，验证相关技术的运用。
+用flutter模仿B站客户端，验证相关技术的运用。
 
 
 ## Getting Started
