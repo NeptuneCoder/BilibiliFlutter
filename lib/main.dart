@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:bilibili_flutter/moudles/app/global_routes.dart';
+import 'package:bilibili_flutter/moudles/empty/empty.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,10 +15,31 @@ class BiliApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: (settings) {
+        return PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) {
+              return GlobalRoutes.getWidgetByName(settings.name!,
+                  param: ((settings.arguments ?? "") as String)) ??
+                  EmptyPage();
+            }, transitionsBuilder:
+            (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+          final tween =
+          Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          final offsetAnimation = animation.drive(tween);
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        });
+      }
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const SplashPage(title: 'Flutter Demo Home Page'),
+      primarySwatch: Colors.blue,
+    ),
+    home: const SplashPage(title: 'Flutter Demo Home Page')
+    ,
     );
   }
 }
@@ -29,6 +54,26 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  late Timer _timer;
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _timer.cancel();
+  }
+
+  ///注册倒计时
+  @override
+  void initState() {
+    super.initState();
+
+    var duration = const Duration(seconds: 4);
+    _timer = Timer(duration, () {
+      Navigator.pushReplacementNamed(context, "");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
