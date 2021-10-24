@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:bilibili_flutter/common/constant/bl_constant.dart';
 import 'package:bilibili_flutter/common/log/bl_log.dart';
@@ -10,7 +9,7 @@ import 'package:dio/dio.dart';
 import 'dart:convert' as convert;
 
 typedef ErrorTypeCallback = void Function();
-typedef SuccessCallback = void Function(String);
+typedef SuccessCallback = void Function(dynamic);
 
 class NetUtil {
   NetUtil._private();
@@ -76,26 +75,11 @@ class NetUtil {
 
       jsonParam["ts"] = getCurrentTimeMillis();
 
-      //
-      // var randomNum = Random().nextInt(10000);
-      // var csrf =
-      // md5Encode("${getCurrentTimeMillis()}$deviceId$deviceName$randomNum");
-      // Log.i("secretKey =  ${await GlobalConstant.secretKey}");
-      // var keyIv = md5Encode("${await GlobalConstant.secretKey}$csrf");
-      //
-      // var encryptKey = keyIv.substring(0, 16);
-      // var aesIv = keyIv.substring(16, 32);
-      //
-      // Log.i("cstf === $csrf");
-      // Log.i("encryptKey === $encryptKey");
-      // Log.i("aesIv === $aesIv");
-
       _dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
         _dio.lock();
         options.headers.remove("Content-Type");
         var headerParam = {
           "Connection": "true",
-          // "csrf": csrf,
           "os": _getPlatformName(),
           "lang": "zh-cn",
           "ENCRYPT": "1",
@@ -123,17 +107,17 @@ class NetUtil {
       // Log.i("请求参数已加密:$encodeParam");
       // var response =
       //     await _dio.post<String>(url, data: "post_data=$encodeParam");
-      var response =
-          await _dio.post<String>(url, data: "post_data=");
+      var response = await _dio.post<String>(url, data: "post_data=");
 
       if (response.statusCode == 200) {
         Log.i("response statusCode ==  ${response.statusCode}");
         Log.i("response data ==  ${response.data}");
-        var resContent =
+        var resContent =response.data ?? "";
             ""; //aesDecode(response.data ?? "", encryptKey, aesIv);
-        successCallback?.call(resContent);
+        var resValue = json.decode(resContent);
+        successCallback?.call(resValue);
         // Log.i("解密数据:$resContent");
-        // return json.decode(resContent);
+        return resValue;
       } else {
         //TODO 其他异常进行对应提示
         errorTypeCallback?.call();
